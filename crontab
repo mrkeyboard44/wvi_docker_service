@@ -1,0 +1,3 @@
+# Run the Python script daily at 1 AM
+0 1 * * * /usr/local/bin/python /app/workiz-fetcher.py >> /var/log/cron.log 2>&1
+

@@ -1,0 +1,27 @@
+version: '3'
+services:
+  workiz-fetcher:
+    build:
+      context: .
+    env_file:
+      - .env
+    volumes:
+      - ./workiz-fetcher.py:/app/workiz-fetcher.py
+      - ./requirements.txt:/app/requirements.txt
+      - ./crontab:/etc/cron.d/cron-job
+    command: bash -c "cron && tail -f /var/log/cron.log"
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mysql:latest
+    env_file:
+      - .env
+    ports:
+      - "3306:3306"  # Mapping MySQL port
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data:
+    driver: local
