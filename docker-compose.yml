@@ -3,8 +3,6 @@ services:
   workiz-fetcher:
     build:
       context: .
-      dockerfile: dockerfile
-      image: workiz-fetcher:latest
     env_file:
       - .env
     volumes:
