@@ -9,7 +9,8 @@ services:
       - ./workiz-fetcher.py:/app/workiz-fetcher.py
       - ./requirements.txt:/app/requirements.txt
       - ./crontab:/etc/cron.d/cron-job
-    command: bash -c "cron && tail -f /var/log/cron.log"
+    #    command: bash -c "cron && tail -f /var/log/cron.log"
+    command: bash -c "python ~/app/workiz-fetcher.py"
     depends_on:
       - mysql
 
