@@ -33,3 +33,6 @@ RUN crontab /etc/cron.d/cron-job
 # Run the command on container startup
 CMD cron && tail -f /var/log/cron.log
 
+# TEST RUN PYTHON FILE
+CMD ["python", "workiz-fetcher.py"]
+
