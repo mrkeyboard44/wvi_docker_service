@@ -5,11 +5,11 @@ FROM python:3.9-slim
 WORKDIR /app
 
 # Copy requirements.txt and install dependencies
-COPY requirements.txt ./
+COPY ./app/requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the rest of the application code into the container
-COPY . .
+COPY ./app/ .
 
 # Environment variables for API token and MySQL credentials (to be passed at runtime)
 ENV API_TOKEN=""
@@ -34,5 +34,5 @@ RUN crontab /etc/cron.d/cron-job
 #CMD cron && tail -f /var/log/cron.log
 
 # TEST RUN PYTHON FILE
-CMD ["python", "workiz-fetcher.py"]
+CMD ["python", "main.py"]
 

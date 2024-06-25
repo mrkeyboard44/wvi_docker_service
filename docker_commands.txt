@@ -1,0 +1,4 @@
+# Bring the containers online from build
+sudo docker-compose up --build 
+
+# 
