@@ -39,33 +39,21 @@ def get_date_six_months_ago():
     # Calculate the date 6 months ago
     six_months_ago = current_date - timedelta(days=30*6)
     
-    # Check if 6 months ago is in a different year
-    if six_months_ago.year < current_date.year:
-        # Return first day of the current year
-        first_day_current_year = datetime(current_date.year, 1, 1)
-        return [six_months_ago.strftime("%Y-%m-%d"), first_day_current_year.strftime("%Y-%m-%d")]
-    else:
-        return [six_months_ago.strftime("%Y-%m-%d"), False]
+    return six_months_ago.strftime("%Y-%m-%d")
 
-
-    return date
 
 
 if __name__ == "__main__":
     session = Session()
     
     # Example variables for date and start offset
-    six_months_ago, date_2 = get_date_six_months_ago()
+    six_months_ago = get_date_six_months_ago()
     start_offset = 0
     
     # Fetch and save job data from multiple endpoints
     fetch_data_in_batches(API_TOKEN, 'job/all', six_months_ago, start_offset, Jobs, session)
-    if date_2:
-        fetch_data_in_batches(API_TOKEN, 'job/all', date_2, start_offset, Jobs, session)
 
     fetch_data_in_batches(API_TOKEN, 'lead/all', six_months_ago, start_offset, Leads, session)
-    if date_2:
-        fetch_data_in_batches(API_TOKEN, 'lead/all', date_2, start_offset, Jobs, session)
 
     
     session.close()

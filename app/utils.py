@@ -10,7 +10,7 @@ logger = logging.getLogger(__name__)
 
 # Function to fetch data from the API
 def fetch_data_from_api(api_token, endpoint, date, offset):
-    url = f"https://api.workiz.com/api/v1/{api_token}/{endpoint}/?start_date={date}&offset={offset}&records=100&only_open=true"
+    url = f"https://api.workiz.com/api/v1/{api_token}/{endpoint}/?start_date={date}&offset={offset}&records=100&only_open=false"
     headers = {
         'accept': '*/*'
     }
@@ -101,14 +101,16 @@ def fetch_data_in_batches(api_token, endpoint, date, start_offset, table, sessio
     total_replaced = 0
     try:
         while True:
+            print('fetching data... offset', offset, 'enpoint', endpoint, 'date', date)
             api_data = fetch_data_from_api(api_token, endpoint, date, offset)
             if not api_data or not api_data.get('data'):
+                print('api_data from utils', api_data)
                 break
             added, replaced = save_data_to_db(api_data['data'], table, session)  # Assuming 'data' is the list containing job data
             total_added += added
             total_replaced += replaced
             logger.info(f"Endpoint {endpoint}: Date {date}: Batch offset {offset}: Added {added}, Replaced {replaced}")
-            offset += batch_size
+            offset += 1
             # Waiting for 30 seconds to prevent API lockout :P.
             time.sleep(30)
     except Exception as e:
