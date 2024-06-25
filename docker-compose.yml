@@ -20,7 +20,7 @@ services:
       - ./crontab:/etc/cron.d/cron-job
     #    command: bash -c "cron && tail -f /var/log/cron.log"
       - ./wait-for-it.sh:/wait-for-it.sh  # Add this line
-    command: bash -c "/wait-for-it.sh mysql:8001 -- python /app/main.py"
+    command: bash -c "/wait-for-it.sh mysql:3306 -- python /app/main.py"
     depends_on:
       - mysql
 
