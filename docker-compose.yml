@@ -6,11 +6,10 @@ services:
     env_file:
       - .env
     volumes:
-      - ./workiz-fetcher.py:/app/workiz-fetcher.py
-      - ./requirements.txt:/app/requirements.txt
+      - ./app:/app
       - ./crontab:/etc/cron.d/cron-job
     #    command: bash -c "cron && tail -f /var/log/cron.log"
-    command: bash -c "python /app/workiz-fetcher.py"
+    command: bash -c "python /app/main.py"
     depends_on:
       - mysql
 
@@ -19,7 +18,7 @@ services:
     env_file:
       - .env
     ports:
-      - "3306:3306"  # Mapping MySQL port
+      - "8001:3306"  # Mapping MySQL port
     volumes:
       - mysql_data:/var/lib/mysql
 
