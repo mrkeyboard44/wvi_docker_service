@@ -4,4 +4,4 @@ logging
 sqlalchemy
 python-dotenv
 mysql-connector-python
-PyMySQL 
+pymysql
