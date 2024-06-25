@@ -1,5 +1,14 @@
 version: '3'
 services:
+  mysql:
+    image: mysql:latest
+    env_file:
+      - .env
+    ports:
+      - "8001:3306"  # Mapping MySQL port
+    volumes:
+      - mysql_data:/var/lib/mysql
+  
   workiz-fetcher:
     build:
       context: .
@@ -14,14 +23,6 @@ services:
     depends_on:
       - mysql
 
-  mysql:
-    image: mysql:latest
-    env_file:
-      - .env
-    ports:
-      - "8001:3306"  # Mapping MySQL port
-    volumes:
-      - mysql_data:/var/lib/mysql
 
 volumes:
   mysql_data:
