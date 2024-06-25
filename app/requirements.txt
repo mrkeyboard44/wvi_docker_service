@@ -1,6 +1,5 @@
 python-dateutil
 requests
-logging
 sqlalchemy
 python-dotenv
 mysql-connector-python
