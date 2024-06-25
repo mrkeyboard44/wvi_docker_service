@@ -3,4 +3,5 @@ requests
 logging
 sqlalchemy
 python-dotenv
-mysql-connector-python 
+mysql-connector-python
+PyMySQL 
