@@ -8,6 +8,7 @@ services:
       - "8001:3306"  # Mapping MySQL port
     volumes:
       - mysql_data:/var/lib/mysql
+    restart: always
   
   workiz-fetcher:
     build:
